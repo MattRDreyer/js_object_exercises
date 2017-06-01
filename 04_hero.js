@@ -36,11 +36,71 @@
     //@see https://stackoverflow.com/questions/1335851/what-does-use-strict-do-in-javascript-and-what-is-the-reasoning-behind-it
     'use strict';
 
-    ///////////////////////////
-    // Put your code here!
-    ///////////////////////////
+    function LivingThing(name, health) {
+      var name = name;
+      var health = health;
 
-    
+      this.isAlive = function() {
+        if (this.getHealth() > 0) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      this.getName = function() {
+        return name;
+      }
+
+      this.getHealth = function() {
+        return health;
+      }
+
+      this.setHealth = function(x) {
+        health = health - x;
+      }
+    }
+
+    function Hero(name, health) {
+        LivingThing.call(this, name, health);
+
+        this.attack = function(LivingThing)  {
+          let monsterloss = getRandomIntInclusive(0, 10);
+          LivingThing.setHealth(monsterloss);
+          console.log("Monkey attack! " + LivingThing.getName() + "'s health loses " + monsterloss + "health points and the remaining health points are " + LivingThing.getHealth());
+
+          let heroloss = getRandomIntInclusive(0, 10);
+          this.setHealth(heroloss);
+          console.log("Monster attacks Monkey!  Monkey's health loses " + heroloss + "health points and the remaining health points are " + this.getHealth());
+
+        }
+
+
+        this.fight= function(monsters){
+          for(let i = 0; i < monsters.length; i++){
+            while(this.getHealth() > 0 && monsters[i].getHealth() > 0){
+              this.attack(monsters[i]);
+            }
+          }
+        }
+
+    }
+
+    function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+      let LivingThing1 = new LivingThing("Rat", 5);
+      let LivingThing2 = new LivingThing("Goblin", 30);
+      let LivingThing3 = new LivingThing("Ogre", 80);
+
+      let hero = new Hero("Monkey", 100);
+
+      let monsters = [LivingThing1, LivingThing2, LivingThing3];
+
+
 
     //The code below should work when you are done
     console.log("A hero emerges!");

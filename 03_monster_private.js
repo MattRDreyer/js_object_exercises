@@ -14,36 +14,58 @@
  * http://javascript.crockford.com/private.html
  */
 
-(function(){
+(function() {
     //@see https://stackoverflow.com/questions/1335851/what-does-use-strict-do-in-javascript-and-what-is-the-reasoning-behind-it
     'use strict';
 
-    ///////////////////////////
-    // Put your code here!
-    ///////////////////////////
+    function LivingThing(name, health) {
+      var name = name;
+      var health = health;
 
-    
-    
-    //The code below should work when you are done
-    console.log("Monsters!");
+      var isAlive = function() {
+        if (this.getHealth() > 0) {
+          return true;
+        } else {
+          return false;
+        }
+      }
 
-    //for...of loop supported in ES6
-    //not compatable before IE edge
-    //@see http://www.benmvp.com/learning-es6-for-of-loop/
-    //@see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of
-    console.log("ES6 for...in");
-    for (let monster of monsters) {
-        console.log(monster.name + ": " + monster.health);
-    }
+      this.getName = function() {
+        return name;
+      }
 
-    //just a spacer
-    console.log("===================");
+      this.getHealth = function() {
+        return health;
+      }
+  }
 
-    //for loop loop supported before ES6
-    //@see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for
-    console.log("for loop for support before ES6");
-    for (let i=0; i < monsters.length; i++) {
-        console.log(monsters[i].name + ": " + monsters[i].health);
-    }
 
-})();
+      let LivingThing1 = new LivingThing("Rat", 5);
+      let LivingThing2 = new LivingThing("Goblin", 30);
+      let LivingThing3 = new LivingThing("Ogre", 80);
+
+      let monsters = [LivingThing1, LivingThing2, LivingThing3];
+
+      //The code below should work when you are done
+      console.log("Monsters!");
+
+      //for...of loop supported in ES6
+      //not compatable before IE edge
+      //@see http://www.benmvp.com/learning-es6-for-of-loop/
+      //@see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of
+      console.log("ES6 for...in");
+      for (let monster of monsters) {
+        console.log(monster.getName() + ": " + monster.getHealth());
+      }
+
+      //just a spacer
+      console.log("===================");
+
+      //for loop loop supported before ES6
+      //@see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for
+      console.log("for loop for support before ES6");
+      for (let i = 0; i < monsters.length; i++) {
+        console.log(monsters[i].getName() + ": " + monsters[i].getHealth());
+      }
+
+    })();
